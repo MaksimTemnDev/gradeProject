@@ -1,0 +1,45 @@
+# Symfony
+/.env
+/.env.*.local
+/.env.local
+/symfony.lock
+/vendor/
+/node_modules/
+
+# Docker
+*.log
+*.pid
+*.swp
+docker-compose.override.yml
+*.bak
+
+# IDE
+.idea/
+/*.iml
+
+# Composer
+/composer.phar
+/composer.lock
+
+
+/public/build/
+/public/uploads/
+
+
+var/
+/var/
+/var/cache/
+/var/log/
+/var/sessions/
+
+
+*.sublime-workspace
+*.sublime-project
+*.vscode/
+
+
+*.bak
+*.swp
+
+
+*.log
