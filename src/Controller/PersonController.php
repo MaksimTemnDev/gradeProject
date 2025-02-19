@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Person;
+use App\Entity\RandomFact;
 use App\Form\PersonType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,7 @@ class PersonController extends AbstractController
     {
         $person = new Person();
         $form = $this->createForm(PersonType::class, $person);
+        $fact = new RandomFact();
 
         $form->handleRequest($request);
 
@@ -23,6 +25,7 @@ class PersonController extends AbstractController
             // Данные успешно отправлены и валидированы
             return $this->render('person/success.html.twig', [
                 'person' => $person,
+                'fact' => $fact->getRandomFact()
             ]);
         }
 
