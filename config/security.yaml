@@ -1,0 +1,23 @@
+security:
+  password_hashers:
+    App\Security\SecureUser:
+      algorithm: auto
+
+  providers:
+    yaml_users:
+      id: App\Security\YamlUserProvider
+
+  firewalls:
+    main:
+      lazy: true
+      provider: yaml_users
+      form_login:
+        login_path: login
+        check_path: login
+      logout:
+        path: logout
+        target: /
+
+  access_control:
+    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/profile, roles: ROLE_USER }

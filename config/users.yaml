@@ -1,0 +1,8 @@
+users:
+  admin:
+    password: '$2y$10$seVEVpV97E0Pk0d2X2BvB.XpRGMZK/HlCVB78ZWAmWJefVHo9eGRy' #password
+
+    roles: ['ROLE_ADMIN']
+  user:
+    password: '$2y$10$seVEVpV97E0Pk0d2X2BvB.XpRGMZK/HlCVB78ZWAmWJefVHo9eGRy'
+    roles: ['ROLE_USER']
