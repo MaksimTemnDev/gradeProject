@@ -76,6 +76,44 @@ class PersonController extends AbstractController
         ]);
     }
 
+    #[Route('/validate', name: 'app_validate')]
+    public function validateString(Request $request): Response
+    {
+        $defaultPattern = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+        $validationResult = null;
+        $inputString = '';
+
+        if ($request->isMethod('POST')) {
+            $inputString = $request->request->get('input_string', '');
+            $customPattern = $request->request->get('custom_pattern', $defaultPattern);
+
+            try {
+                if (!preg_match($customPattern, $inputString)) {
+                    throw new \InvalidArgumentException('Строка не соответствует паттерну');
+                }
+                $validationResult = [
+                    'success' => true,
+                    'message' => 'Строка соответствует регулярному выражению!'
+                ];
+            } catch (\Exception $e) {
+                $validationResult = [
+                    'success' => false,
+                    'message' => $e->getMessage()
+                ];
+                $this->logError($e, [
+                    'input_string' => $inputString,
+                    'pattern' => $customPattern
+                ]);
+            }
+        }
+
+        return $this->render('person/validate.html.twig', [
+            'result' => $validationResult,
+            'inputString' => $inputString,
+            'defaultPattern' => $defaultPattern
+        ]);
+    }
+
     private function logError(\Throwable $e, array $context = []): void
     {
         $this->logger->error($e->getMessage(), [

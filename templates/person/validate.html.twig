@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Проверка регулярных выражений{% endblock %}
+
+{% block body %}
+    <h1>Проверка строки по регулярному выражению</h1>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="input_string">Строка для проверки:</label>
+            <input type="text" id="input_string" name="input_string"
+                   value="{{ inputString }}" class="form-control">
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="custom_pattern">Регулярное выражение (по умолчанию - email):</label>
+            <input type="text" id="custom_pattern" name="custom_pattern"
+                   value="{{ defaultPattern }}" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Проверить</button>
+    </form>
+
+    {% if result is not null %}
+        <div class="alert alert-{{ result.success ? 'success' : 'danger' }} mt-3">
+            {{ result.message }}
+        </div>
+    {% endif %}
+{% endblock %}
