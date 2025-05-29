@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/var/www/html
+      - ./docker-logs:/var/log
     ports:
       - "9000:9000"
     networks:
